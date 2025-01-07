@@ -29,6 +29,7 @@ const Gallery = ({page, pageSize}) =>{
             return getObjectById(id)
         })
         Promise.all(promises).then((values)=>{
+            console.log('fetched Values>>>>>>>>',values)
             const filteredArray = values.filter((exhibit)=>{
                 return exhibit !== null
         })

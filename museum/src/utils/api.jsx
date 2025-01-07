@@ -13,8 +13,10 @@ export const getObjectIds = () =>{
 }
 
 export const getObjectById = (objectId) =>{
-    return metMuseum.get(`/objects/${objectID}`).then(({data})=>{
+    return metMuseum.get(`/objects/${objectId}`).then(({data})=>{
         return data
+    }).catch((error)=>{
+        console.error('Error getting object by id:', error.message)
     })
 
 }
@@ -27,7 +29,26 @@ export const getMultipleObjectsById = (objectIds) => {
         return data.filter((object) => object !== null)
     })
     .catch((error)=>{
-        console.error('Error fetching multiple objects from api:', error.message)
+        console.error('Error getting multiple objects from api:', error.message)
         return []
     })
+}
+
+export const getDepartments = () => {
+    return metMuseum.get('/departments').then(({data})=>{
+        return data.departments
+    })
+    .catch((error)=>{
+        console.error('Error getting departments:', error.message)
+    })
+}
+
+export const getObjectsByDepartment = (department) => {
+    return metMuseum.get(`/objects?department=${department}`).then(({data})=>{
+        return data.objectIDs
+    })
+    .catch((error)=>{
+        console.error('Error getting exhibits for the department:', error.message)
+    })
+
 }
