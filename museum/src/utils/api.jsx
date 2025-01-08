@@ -44,7 +44,7 @@ export const getDepartments = () => {
 }
 
 export const getObjectsByDepartment = (department) => {
-    return metMuseum.get(`/objects?department=${department}`).then(({data})=>{
+    return metMuseum.get(`/objects?departmentIds=${department}`).then(({data})=>{
         return data.objectIDs
     })
     .catch((error)=>{
