@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import {getObjectIds, getObjectById, getObjectsByDepartment} from '../utils/api'
+import ArtifactCard from './ArtifactCard'
 
 const Gallery = ({page, pageSize, selectedDepartment}) =>{
     const [isLoading, setIsLoading] = useState(false)
@@ -13,7 +14,6 @@ const Gallery = ({page, pageSize, selectedDepartment}) =>{
         if (selectedDepartment) {
             getObjectsByDepartment(selectedDepartment)
                 .then((ids) => {
-                    console.log('fetch Ids for department:>>>>>>>>>', ids)
                     setObjectIds(ids || []);
                 })
                 .catch((error) => {
@@ -47,12 +47,10 @@ const Gallery = ({page, pageSize, selectedDepartment}) =>{
             return getObjectById(id)
         })
         Promise.all(promises).then((values)=>{
-            console.log('fetched Values>>>>>>>>',values)
-            const filteredArray = values.filter((exhibit)=>{
-                return exhibit !== null
+            const filteredArray = values.filter((artifact)=>{
+                return artifact !== null
         })
         setMuseumObjects(filteredArray)
-        console.log('updating museumObjects, filteredArray')
         })
         .catch((error)=>{
             console.error('Error fetching museum objects:', error.message)
@@ -61,16 +59,11 @@ const Gallery = ({page, pageSize, selectedDepartment}) =>{
 
 return (
     <div>
-        {console.log('Rendering museumObjects:', museumObjects)}
         {isLoading && <p>Loading, please wait......</p>}
         <div className='museumGrid'>
-            {museumObjects.map((exhibit) => (
-                <div key={exhibit.objectID} className='exhibitCard'>
-                    <img
-                        src={exhibit.primaryImageSmall || 'placeholder.jpg'}
-                        alt={exhibit.title || 'Untitled'}
-                    />
-                    <h2>{exhibit.title}</h2>
+            {museumObjects.map((artifact) => (
+                <div key={artifact.objectID} className='artifactCard'>
+                    <ArtifactCard key={artifact.objectID} artifact={artifact} />
                 </div>
             ))}
         </div>

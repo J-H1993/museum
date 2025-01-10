@@ -13,7 +13,6 @@ const Home = () =>{
     const handlePageBackClick = () =>{
         setPageNo((prevPageNo) => prevPageNo -1)
     }
-    console.log('current selectsedDepartment:,>>>>>>>>>>>>>', selectedDepartment)
     return (
         <>  
             <ExhibitsFilter selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} />
