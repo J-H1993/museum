@@ -4,13 +4,17 @@ const ArtifactCard = ({artifact}) => {
     const {objectID, title, primaryImageSmall, primaryImage} = artifact
 
     return(
-        <div className='artifactCard'>
+        <div className='card h-100'>
             <Link to={`/artifact/${objectID}`}>
                 <img 
                     src={primaryImageSmall || primaryImage ||'placeholder.jpg'}
+                    className='card-img-top'
                     alt={title || 'Untitled'}
                 />
-                <h2>{title || 'Untitled'}</h2>
+                <div className='card-body'>
+                <h3 className='card-title'>{title || 'Untitled'}</h3>
+                </div>
+                
             </Link>
         </div>
     )

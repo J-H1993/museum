@@ -58,11 +58,11 @@ const Gallery = ({page, pageSize, selectedDepartment}) =>{
     }, [objectIds, page, pageSize])
 
 return (
-    <div>
+    <div className='container'>
         {isLoading && <p>Loading, please wait......</p>}
-        <div className='museumGrid'>
+        <div className='row'>
             {museumObjects.map((artifact) => (
-                <div key={artifact.objectID} className='artifactCard'>
+                <div key={artifact.objectID} className='col-md-4 mb-4'>
                     <ArtifactCard key={artifact.objectID} artifact={artifact} />
                 </div>
             ))}

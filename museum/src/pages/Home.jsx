@@ -16,7 +16,7 @@ const Home = () =>{
     return (
         <>  
             <ExhibitsFilter selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} />
-            <Gallery page={pageNo} pageSize={10} selectedDepartment={selectedDepartment}/>
+            <Gallery page={pageNo} pageSize={6} selectedDepartment={selectedDepartment}/>
             <button onClick={handlePageForwardClick}>next</button>
             <button onClick={handlePageBackClick} disabled={pageNo===1}>Previous</button>
         </>
