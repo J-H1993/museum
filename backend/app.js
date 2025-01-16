@@ -8,7 +8,7 @@ const app = express()
 
 app.use(express.json())
 
-app.get
+app.get('/api/artworks', sendArtworks)
 
 
 module.exports = app
