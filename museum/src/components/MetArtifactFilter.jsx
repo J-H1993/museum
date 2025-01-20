@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getDepartments } from '../utils/api';
 
-const ExhibitsFilter = ({ selectedDepartment, setSelectedDepartment }) => {
+const MetArtifactFilter = ({ selectedDepartment, setSelectedDepartment }) => {
     const [departments, setDepartments] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -42,4 +42,4 @@ const ExhibitsFilter = ({ selectedDepartment, setSelectedDepartment }) => {
     );
 };
 
-export default ExhibitsFilter;
+export default MetArtifactFilter;

@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {getObjectIds, getObjectById, getObjectsByDepartment} from '../utils/api'
 import ArtifactCard from './ArtifactCard'
 
-const Gallery = ({page, pageSize, selectedDepartment}) =>{
+const Gallery = ({page, pageSize, selectedDepartment,}) =>{
     const [isLoading, setIsLoading] = useState(false)
     const [objectIds, setObjectIds] = useState([])
     const [museumObjects, setMuseumObjects] = useState([])
@@ -10,7 +10,6 @@ const Gallery = ({page, pageSize, selectedDepartment}) =>{
     useEffect(() => {
         setMuseumObjects([])
         setIsLoading(true);
-    
         if (selectedDepartment) {
             getObjectsByDepartment(selectedDepartment)
                 .then((ids) => {
