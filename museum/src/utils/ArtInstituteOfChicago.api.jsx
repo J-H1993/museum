@@ -4,9 +4,9 @@ const artInstitute = axios.create({
     baseURL:'https://api.artic.edu/api/v1'
 })
 
-export const getArtworks = async () =>{
+export const getArtworks = async (pageNo) =>{
     try{
-        const {data} = await artInstitute.get('/artworks?page=1&limit=6&fields=id,title,image_id')
+        const {data} = await artInstitute.get(`/artworks?page=${pageNo}&limit=6&fields=id,title,image_id`)
         console.log({data})
         return data
     }catch(err){

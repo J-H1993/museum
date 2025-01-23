@@ -20,7 +20,7 @@ const Home = () =>{
         <>  
             <SelectCollection collection={collection} setCollection={setCollection}/>
             <MetArtifactFilter selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} />
-            {collection === 'Metropolitan Museum'?(<Gallery page={pageNo} pageSize={6} selectedDepartment={selectedDepartment} />) : <ArtInstituteGallery page={pageNo} pageSize={6}/>}
+            {collection === 'Metropolitan Museum'?(<Gallery page={pageNo} pageSize={6} selectedDepartment={selectedDepartment} selectedCollection={collection} />) : <ArtInstituteGallery page={pageNo} pageSize={6}/>}
             <button onClick={handlePageForwardClick}>next</button>
             <button onClick={handlePageBackClick} disabled={pageNo===1}>Previous</button>
         </>

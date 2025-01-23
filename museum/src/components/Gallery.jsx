@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {getObjectIds, getObjectById, getObjectsByDepartment} from '../utils/api'
 import ArtifactCard from './ArtifactCard'
 
-const Gallery = ({page, pageSize, selectedDepartment,}) =>{
+const Gallery = ({page, pageSize, selectedDepartment, selectedCollection}) =>{
     const [isLoading, setIsLoading] = useState(false)
     const [objectIds, setObjectIds] = useState([])
     const [museumObjects, setMuseumObjects] = useState([])
@@ -62,7 +62,7 @@ return (
         <div className='row'>
             {museumObjects.map((artifact) => (
                 <div key={artifact.objectID} className='col-md-4 mb-4'>
-                    <ArtifactCard key={artifact.objectID} artifact={artifact} selectedDepartment={selectedDepartment} />
+                    <ArtifactCard key={artifact.objectID} artifact={artifact} selectedCollection={selectedCollection} />
                 </div>
             ))}
         </div>
