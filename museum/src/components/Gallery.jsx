@@ -62,7 +62,7 @@ return (
         <div className='row'>
             {museumObjects.map((artifact) => (
                 <div key={artifact.objectID} className='col-md-4 mb-4'>
-                    <ArtifactCard key={artifact.objectID} artifact={artifact} />
+                    <ArtifactCard key={artifact.objectID} artifact={artifact} selectedDepartment={selectedDepartment} />
                 </div>
             ))}
         </div>

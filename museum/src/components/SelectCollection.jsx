@@ -13,7 +13,6 @@ const SelectCollection = ({collection, setCollection, onCollectionChange}) =>{
 
     const handleSelectedCollectionChange = (event) =>{
         setCollection(event.target.value)
-        // onCollectionChange(event.target.value)
     }
     
     return (

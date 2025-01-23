@@ -4,6 +4,7 @@ const ArtifactCard = ({artifact}) => {
     const {objectID, title, primaryImageSmall, primaryImage} = artifact
 
     return(
+        
         <div className='card h-100'>
             <Link to={`/artifact/${objectID}`}>
                 <img 
