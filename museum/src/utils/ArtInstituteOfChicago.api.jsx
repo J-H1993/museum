@@ -32,10 +32,17 @@ export const getArtworksByExhibit = async (exhibitionId, pageNo) => {
                 limit:6
             }
         })
-        console.log(data)
-        console.log(exhibitionId)
         return data
     }catch(err){
         console.error('Error getting artworks for selected exhibit:', err.message)
+    }
+}
+
+export const getArtworkById = async (artworkId) => {
+    try{
+        const {data} = await artInstitute.get(`/artworks/${artworkId}`)
+        return data
+    }catch(err){
+        console.error('Error fetching artwork by id:', err.message)
     }
 }

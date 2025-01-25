@@ -11,7 +11,6 @@ const ArtInstituteFilter = ({selectedExhibition, setSelectedExhibition}) =>{
             try{
                 const instituteExhibitions = await getInstituteExhibitions()
                 const exhibitionArray = instituteExhibitions.data.data.data
-                console.log('Array of exhibitions',exhibitionArray)
                 setExhibition(exhibitionArray)
             }catch(error){
                 console.error(`Failed to fetch list of exhibitions:`, error.message)
