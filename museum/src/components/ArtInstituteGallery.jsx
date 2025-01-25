@@ -3,6 +3,7 @@ import { getArtworks } from '../utils/ArtInstituteOfChicago.api'
 import { getArtworksByExhibit } from '../utils/ArtInstituteOfChicago.api'
 import { getArtworkById } from '../utils/ArtInstituteOfChicago.api'
 import ArtifactCard from './ArtifactCard'
+import EmptyExhibitCard from './EmptyExhibitCard'
 
 
 const ArtInstituteGallery = ({page, selectedExhibition, setTotalGallerySize}) =>{
@@ -65,14 +66,19 @@ const ArtInstituteGallery = ({page, selectedExhibition, setTotalGallerySize}) =>
 
     return(
         <>
-            {paginatedArtwork.map((artwork, index)=>{
-                const imageUrl = `${iiif}/${artwork.image_id}/full/843,/0/default.jpg`
-                return(
-                    <div key={artwork.id || index} className='col-md-4 mb-4'>
-                        <ArtifactCard key={artwork.id} artwork={artwork} imageUrl={imageUrl}/>
-                    </div>
-                )
-            })}
+            {museumObjects.length === 0 && !isLoading ? (
+                <EmptyExhibitCard />
+            ) : (
+                paginatedArtwork.map((artwork, index)=>{
+                    const imageUrl = `${iiif}/${artwork.image_id}/full/843,/0/default.jpg`
+                    return(
+                        <div key={artwork.id || index} className='col-md-4 mb-4'>
+                            <ArtifactCard key={artwork.id} artwork={artwork} imageUrl={imageUrl}/>
+                        </div>
+                    )
+                })
+            )}
+        
         </>
     )
 
