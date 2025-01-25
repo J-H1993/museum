@@ -7,10 +7,35 @@ const artInstitute = axios.create({
 export const getArtworks = async (pageNo) =>{
     try{
         const {data} = await artInstitute.get(`/artworks?page=${pageNo}&limit=6&fields=id,title,image_id`)
-        console.log({data})
         return data
     }catch(err){
         console.error('Error getting artwork for the gallery:', err.message)
     }
     
+}
+
+export const getInstituteExhibitions= async () => {
+    try{
+        const data = await artInstitute.get(`/exhibitions`)
+        return {data}
+    }catch(err){
+        console.error('Error getting departments list:', err.message)
+    }
+}
+
+export const getArtworksByExhibit = async (exhibitionId, pageNo) => {
+    try{
+        const data = await artInstitute.get(`/exhibitions/${exhibitionId}`,{
+            params:{
+                include:'artworks',
+                page:pageNo,
+                limit:6
+            }
+        })
+        console.log(data)
+        console.log(exhibitionId)
+        return data
+    }catch(err){
+        console.error('Error getting artworks for selected exhibit:', err.message)
+    }
 }

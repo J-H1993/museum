@@ -1,9 +1,10 @@
 import {useState, useEffect} from 'react'
 import { getArtworks } from '../utils/ArtInstituteOfChicago.api'
+import { getArtworksByExhibit } from '../utils/ArtInstituteOfChicago.api'
 import ArtifactCard from './ArtifactCard'
 
 
-const ArtInstituteGallery = ({page}) =>{
+const ArtInstituteGallery = ({page, selectedExhibition}) =>{
     const [isLoading, setIsLoading] = useState(false)
     const [museumObjects, setMuseumObjects] = useState([])
     const [iiif, setIiif] = useState('')
@@ -26,9 +27,29 @@ const ArtInstituteGallery = ({page}) =>{
             }
         }
 
-        fetchArtworks()
+        const fetchArtworksbyExhibition = async () =>{
+            try{
+                const response = await getArtworksByExhibit(selectedExhibition)
+                const iiifUrl = response.config.iiif_url
+                const artworkArray = response.data.data.artworks
+                setMuseumObjects(artworkArray || [])
+                setIiif(iiifUrl)
 
-    },[page])
+            }catch(error){
+                console.error('Error fetching artworks for the chosen exhibit:', error.message)
+            }finally{
+                setIsLoading(false)
+            }
+        }
+        if(!selectedExhibition){
+            fetchArtworks()
+        }else{
+            fetchArtworksbyExhibition()
+            console.log('Log after exhibition call',museumObjects)
+        }
+        
+
+    },[page, selectedExhibition])
 
     return(
         <>
