@@ -12,18 +12,25 @@ const Home = () =>{
     const [selectedDepartment, setSelectedDepartment] = useState('')
     const [selectedExhibiton, setSelectedExhibition] = useState('')
     const [collection, setCollection] = useState('Art Institute Of Chicago')
+    const [totalGallerySize, setTotalGallerySize] = useState(0)
+
+    const itemsPerPage = 6
+
     const handlePageForwardClick = () =>{
         setPageNo((prevPageNo) => prevPageNo +1)
     }
     const handlePageBackClick = () =>{
         setPageNo((prevPageNo) => prevPageNo -1)
     }
+
+    const disableNextButton = pageNo >= Math.ceil(totalGallerySize/6)
+    
     return (
         <>  
             <SelectCollection collection={collection} setCollection={setCollection}/>
             {collection === 'Metropolitan Museum'?(<MetArtifactFilter selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment}/>) : <ArtInstituteFilter selectedExhibiton={selectedExhibiton} setSelectedExhibition={setSelectedExhibition}/>}
-            {collection === 'Metropolitan Museum'?(<Gallery page={pageNo} pageSize={6} selectedDepartment={selectedDepartment} selectedCollection={collection} />) : <ArtInstituteGallery page={pageNo} pageSize={6} selectedExhibition={selectedExhibiton}/>}
-            <button onClick={handlePageForwardClick}>next</button>
+            {collection === 'Metropolitan Museum'?(<Gallery page={pageNo} pageSize={itemsPerPage} selectedDepartment={selectedDepartment} selectedCollection={collection} setTotalGallerySize={setTotalGallerySize} />) : <ArtInstituteGallery page={pageNo} pageSize={itemsPerPage} selectedExhibition={selectedExhibiton} setTotalGallerySize={setTotalGallerySize}/>}
+            <button onClick={handlePageForwardClick} disabled={disableNextButton}>next</button>
             <button onClick={handlePageBackClick} disabled={pageNo===1}>Previous</button>
         </>
     )

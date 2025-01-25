@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {getObjectIds, getObjectById, getObjectsByDepartment} from '../utils/api'
 import ArtifactCard from './ArtifactCard'
 
-const Gallery = ({page, pageSize, selectedDepartment, selectedCollection}) =>{
+const Gallery = ({page, pageSize, selectedDepartment, selectedCollection, setTotalGallerySize}) =>{
     const [isLoading, setIsLoading] = useState(false)
     const [objectIds, setObjectIds] = useState([])
     const [museumObjects, setMuseumObjects] = useState([])
@@ -14,6 +14,7 @@ const Gallery = ({page, pageSize, selectedDepartment, selectedCollection}) =>{
             getObjectsByDepartment(selectedDepartment)
                 .then((ids) => {
                     setObjectIds(ids || []);
+                    setTotalGallerySize(ids.length)
                 })
                 .catch((error) => {
                     console.error('Error fetching IDs for department:', error.message);

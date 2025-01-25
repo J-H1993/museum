@@ -5,10 +5,11 @@ import { getArtworkById } from '../utils/ArtInstituteOfChicago.api'
 import ArtifactCard from './ArtifactCard'
 
 
-const ArtInstituteGallery = ({page, selectedExhibition}) =>{
+const ArtInstituteGallery = ({page, selectedExhibition, setTotalGallerySize}) =>{
     const [isLoading, setIsLoading] = useState(false)
     const [museumObjects, setMuseumObjects] = useState([])
     const [iiif, setIiif] = useState('')
+    const itemsPerPage = 6
 
     useEffect(()=>{
         setMuseumObjects([])
@@ -18,6 +19,7 @@ const ArtInstituteGallery = ({page, selectedExhibition}) =>{
             try{
                 const response = await getArtworks(page)
                 const iiifUrl = response.config.iiif_url
+                setTotalGallerySize(response.pagination.total)
                     setMuseumObjects(response.data|| [])
                     setIiif(iiifUrl)
                 
@@ -42,7 +44,7 @@ const ArtInstituteGallery = ({page, selectedExhibition}) =>{
                     return {id:data.id, title:data.title, image_id:data.image_id, artist_display:data.artist_display}
                 })
                 setMuseumObjects(extractedArtworks || [])
-                setIiif(iiifUrl)
+                setTotalGallerySize(artworkIdArray.length)
 
             }catch(error){
                 console.error('Error fetching artworks for the chosen exhibit:', error.message)
@@ -59,9 +61,11 @@ const ArtInstituteGallery = ({page, selectedExhibition}) =>{
 
     },[page, selectedExhibition])
 
+    const paginatedArtwork = selectedExhibition ? museumObjects.slice((page -1) * itemsPerPage, page * itemsPerPage) : museumObjects
+
     return(
         <>
-            {museumObjects.map((artwork, index)=>{
+            {paginatedArtwork.map((artwork, index)=>{
                 const imageUrl = `${iiif}/${artwork.image_id}/full/843,/0/default.jpg`
                 return(
                     <div key={artwork.id || index} className='col-md-4 mb-4'>
