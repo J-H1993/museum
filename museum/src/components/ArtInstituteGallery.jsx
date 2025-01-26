@@ -73,7 +73,7 @@ const ArtInstituteGallery = ({page, selectedExhibition, setTotalGallerySize}) =>
                     const imageUrl = `${iiif}/${artwork.image_id}/full/843,/0/default.jpg`
                     return(
                         <div key={artwork.id || index} className='col-md-4 mb-4'>
-                            <ArtifactCard key={artwork.id} artwork={artwork} imageUrl={imageUrl}/>
+                            <ArtifactCard key={artwork.id} artwork={artwork} imageUrl={imageUrl} artworkId={artwork.id} iiif={iiif}/>
                         </div>
                     )
                 })

@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 
-const ArtifactCard = ({artifact, artwork, imageUrl, selectedCollection}) => {
+const ArtifactCard = ({artifact, artwork, imageUrl, selectedCollection, artworkId, iiif}) => {
     
 
     console.log(imageUrl)
@@ -24,8 +24,10 @@ const ArtifactCard = ({artifact, artwork, imageUrl, selectedCollection}) => {
     } else{
         return (
             <div className='card h-100'>
-                <img src={imageUrl} alt={artwork.title} className='card-img-top'/>
-                <h3>{artwork.title || 'untitled'}</h3>
+                <Link to={`/artworks/${artworkId}`} state={{selectedCollection, iiif}}>
+                    <img src={imageUrl} alt={artwork.title} className='card-img-top'/>
+                    <h3>{artwork.title || 'untitled'}</h3>
+                </Link>
             </div>
         ) 
     }
