@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 
 
-const SelectCollection = ({collection, setCollection, onCollectionChange}) =>{
+const SelectCollection = ({collection, setCollection}) =>{
     const [isLoading, setIsLoading] = useState(false)
 
     const collections = ['Art Institute Of Chicago', 'Metropolitan Museum']
@@ -13,6 +13,7 @@ const SelectCollection = ({collection, setCollection, onCollectionChange}) =>{
 
     const handleSelectedCollectionChange = (event) =>{
         setCollection(event.target.value)
+        console.log(collection)
     }
     
     return (

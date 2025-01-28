@@ -8,7 +8,7 @@ const ArtifactCard = ({artifact, artwork, imageUrl, selectedCollection, artworkI
         const { objectID, title, primaryImageSmall, primaryImage } = artifact
         return (
             <div className='card h-100'>
-                <Link to={`/artifact/${objectID}`}>
+                <Link to={`/artifact/${objectID}`} state={{selectedCollection}}>
                     <img 
                         src={primaryImageSmall || primaryImage ||'placeholder.jpg'}
                         className='card-img-top'

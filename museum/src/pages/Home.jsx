@@ -1,3 +1,4 @@
+import Header from '../components/Header'
 import Gallery from '../components/Gallery'
 import ArtInstituteGallery from '../components/ArtInstituteGallery'
 import SelectCollection from '../components/SelectCollection'
@@ -27,6 +28,7 @@ const Home = () =>{
     
     return (
         <>  
+            <Header />
             <SelectCollection collection={collection} setCollection={setCollection}/>
             {collection === 'Metropolitan Museum'?(<MetArtifactFilter selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment}/>) : <ArtInstituteFilter selectedExhibiton={selectedExhibiton} setSelectedExhibition={setSelectedExhibition}/>}
             {collection === 'Metropolitan Museum'?(<Gallery page={pageNo} pageSize={itemsPerPage} selectedDepartment={selectedDepartment} selectedCollection={collection} setTotalGallerySize={setTotalGallerySize} />) : <ArtInstituteGallery page={pageNo} pageSize={itemsPerPage} selectedExhibition={selectedExhibiton} setTotalGallerySize={setTotalGallerySize}/>}

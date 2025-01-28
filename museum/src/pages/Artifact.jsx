@@ -3,15 +3,21 @@ import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getObjectById } from "../utils/api";
 import { getArtworkById } from "../utils/ArtInstituteOfChicago.api";
+import { handleSaveToExhibit } from "../components/PersonalExhibitonStorage";
+import Header from '../components/Header'
 
 const Artifact = () => {
   const [artifact, setArtifact] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [personalExhibitName, setPersonalExhibitName] = useState("")
+  const [personalExhibitList, setPersonalExhibitList] = useState([])
   const { artifact_id } = useParams();
   const {artworkId} = useParams()
   const { state } = useLocation();
   const collection = state.selectedCollection;
   const iiif = state.iiif
+
+
 
   useEffect(() => {
     if (collection === "Metropolitan Museum") {
@@ -40,7 +46,33 @@ const Artifact = () => {
 
       fetchArtwork();
     }
-  }, [artifact_id, collection]);
+  }, [artifact_id, artworkId, collection]);
+
+  useEffect (()=>{
+    const savedPersonalExhibits = JSON.parse(localStorage.getItem("exhibits")) || {}
+    setPersonalExhibitList(Object.keys(savedPersonalExhibits))
+  }, [personalExhibitName])
+
+  const handleSaveClick = () =>{
+    if(!personalExhibitName){
+      alert("Please select or create a collection.")
+      console.log(JSON.parse(localStorage.getItem("exhibits")))
+      return
+    }
+    const saved = handleSaveToExhibit(artifact, personalExhibitName, collection)
+    if(saved){
+      alert(`Saved to exhibit: ${personalExhibitName}`)
+      setPersonalExhibitName("")
+    }
+  }
+
+  const handleCreateExhibit = () =>{
+    const newPersonalExhibitName = prompt("Enter a name for your new exhibition")
+    if(newPersonalExhibitName && createPersonalExhibit(newPersonalExhibitName)){
+      setPersonalExhibitList((prevList)=>[...prevList, newPersonalExhibitName])
+      setPersonalExhibitName(newPersonalExhibitName)
+    }
+  }
 
   if (isLoading) {
     return <p>Loading artifact...</p>;
@@ -55,6 +87,7 @@ const Artifact = () => {
 
   return (
     <div>
+      <Header />
       {collection === "Metropolitan Museum" ? (
         <div>
           <h1>{artifact.title || "Untitled"}</h1>
@@ -110,6 +143,22 @@ const Artifact = () => {
 
         </div>
       )}
+       <div>
+            <h3>Save to Personal Exhibition</h3>
+            <select
+            value={personalExhibitName}
+            onChange={(event) => setPersonalExhibitName(event.target.value)}
+            >
+              <option value="">Select a Personal Exhibit</option>
+              {personalExhibitList.map((name)=>(
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
+            <button onClick={handleSaveClick}>Save to Collection</button>
+            <button onClick={handleCreateExhibit}>Create a New Personal Exhibit</button>
+          </div>
     </div>
   );
 };
