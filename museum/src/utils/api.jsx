@@ -14,6 +14,7 @@ export const getObjectIds = () =>{
 
 export const getObjectById = (objectId) =>{
     return metMuseum.get(`/objects/${objectId}`).then(({data})=>{
+        console.log(data)
         return data
     }).catch((error)=>{
         console.error('Error getting object by id:', error.message)

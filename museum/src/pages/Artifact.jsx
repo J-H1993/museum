@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getObjectById } from "../utils/api";
 import { getArtworkById } from "../utils/ArtInstituteOfChicago.api";
 import { handleSaveToExhibit } from "../components/PersonalExhibitonStorage";
+import { createPersonalExhibit } from "../components/PersonalExhibitonStorage";
 import Header from '../components/Header'
 
 const Artifact = () => {
@@ -56,7 +57,6 @@ const Artifact = () => {
   const handleSaveClick = () =>{
     if(!personalExhibitName){
       alert("Please select or create a collection.")
-      console.log(JSON.parse(localStorage.getItem("exhibits")))
       return
     }
     const saved = handleSaveToExhibit(artifact, personalExhibitName, collection)
@@ -83,6 +83,7 @@ const Artifact = () => {
   }
 
   const fullImageUrl = `${iiif}/${artifact.image_id}/full/843,/0/default.jpg`
+
   
 
   return (

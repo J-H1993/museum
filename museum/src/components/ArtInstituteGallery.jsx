@@ -22,7 +22,11 @@ const ArtInstituteGallery = ({page, selectedExhibition, setTotalGallerySize}) =>
                 const iiifUrl = response.config.iiif_url
                 setTotalGallerySize(response.pagination.total)
                     setMuseumObjects(response.data|| [])
-                    setIiif(iiifUrl)
+                    if(iiifUrl){
+                        setIiif(iiifUrl)
+                        localStorage.setItem("iiifBaseURL", iiifUrl)
+                    }
+                    
                 
             } catch(error){
                 console.error('Error fetching artworks from the Art Institute Of Chicago collection:', error.message)

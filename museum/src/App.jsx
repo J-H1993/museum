@@ -11,7 +11,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/artifact/:artifact_id" element={<Artifact />} />
         <Route path="/artworks/:artworkId" element={<Artifact />} />
-        <Route path="/collections" element={<ManagePersonalExhibitsPage />}/>
+        <Route path="/collections" element={<ManagePersonalExhibitsPage />}/> 
       </Routes>
     </>
   )

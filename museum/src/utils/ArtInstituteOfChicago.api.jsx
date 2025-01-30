@@ -46,3 +46,4 @@ export const getArtworkById = async (artworkId) => {
         console.error('Error fetching artwork by id:', err.message)
     }
 }
+

@@ -23,16 +23,12 @@ export const buildStandardObject = (artifact, apiCollection) => {
     if(apiCollection === 'Metropolitan Museum') {
         return {
             id:artifact.objectID,
-            title:artifact.title || "Untitled",
-            image:artifact.primaryImageSmall || artifact.primaryImage || "placeholder.jpg",
-            collection:apiCollection
+            collection:'Metropolitan Museum'
         }
     }else{
         return{
             id:artifact.id,
-            title:artifact.title || "untitled",
-            image:artifact.image_url || "placeholder.jpg",
-            collection:apiCollection
+            collection:'The Art Institute of Chicago'
         }
     }
 }
@@ -59,4 +55,20 @@ export const handleSaveToExhibit = (artifact, myExhibitName, collection) =>{
     alert(`Item has been added to ${myExhibitName}!`)
     return true
 }
+
+export const deletePersonalExhibit = (exhibitName) => {
+    const savedExhibits = JSON.parse(localStorage.getItem('exhibits')) || {};
+
+    if (savedExhibits[exhibitName]) {
+        delete savedExhibits[exhibitName];
+        localStorage.setItem('exhibits', JSON.stringify(savedExhibits));
+
+        alert(`${exhibitName} has been deleted!`);
+        return true;
+    } else {
+        alert("Exhibit not found.");
+        return false;
+    }
+};
+
 

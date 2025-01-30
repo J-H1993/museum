@@ -5,7 +5,7 @@ const Header = () => {
      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
             <Link className="navbar-brand" to='/collections'>
-                Personal Exhibit
+                Manage Personal Exhibitions
             </Link>
             <div className="navbar-nav">
                 <Link className="nav-item nav-link" to='/'>
