@@ -24,8 +24,11 @@ const Home = () => {
         const params = new URLSearchParams(location.search);
         const exhibitName = params.get('personalExhibit');
         if (exhibitName) {
+            setCollection('Personal Exhibits')
             setSelectedPersonalExhibit(exhibitName); 
             setPersonalExhibitLoaded(true); 
+        }else{
+            setCollection('Art Institute Of Chicago')
         }
     }, [location]);
 

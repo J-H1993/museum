@@ -16,7 +16,6 @@ const SelectCollection = ({ collection, setCollection }) => {
         const selected = event.target.value;
         setCollection(selected);
         if (selected === 'Personal Exhibits') {
-         
             navigate('/collections');  
         }
     };
