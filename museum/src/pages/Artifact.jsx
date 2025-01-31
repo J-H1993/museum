@@ -17,6 +17,9 @@ const Artifact = () => {
   const { state } = useLocation();
   const collection = state.selectedCollection;
   const iiif = state.iiif
+  const image_id = state?.image_id
+  console.log('logging image id in artifact page',image_id)
+  console.log('logging iiif state in artifact', iiif)
 
 
 
@@ -82,7 +85,9 @@ const Artifact = () => {
     return <p>No artifact found.</p>;
   }
 
-  const fullImageUrl = `${iiif}/${artifact.image_id}/full/843,/0/default.jpg`
+  const fullImageUrl = image_id ? `${iiif}/${image_id}/full/843,/0/default.jpg`:`${iiif}/${artifact.image_id}/full/843,/0/default.jpg`
+
+  console.log('Logging full imageurl constructed in artifact',fullImageUrl)
 
   
 

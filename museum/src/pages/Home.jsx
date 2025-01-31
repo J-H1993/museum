@@ -62,7 +62,13 @@ const Home = () => {
 
            
             {selectedPersonalExhibit && personalExhibitLoaded ? (
-                <PersonalExhibitItems personalExhibitName={selectedPersonalExhibit} />
+                <PersonalExhibitItems 
+                personalExhibitName={selectedPersonalExhibit}
+                pageNo={pageNo}
+                handlePageForwardClick={handlePageForwardClick} 
+                handlePageBackClick={handlePageBackClick}
+                setTotalGallerySize={setTotalGallerySize}
+                pageSize={itemsPerPage}/>
             ) : (
             
                 <>

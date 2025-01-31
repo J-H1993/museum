@@ -56,6 +56,18 @@ export const handleSaveToExhibit = (artifact, myExhibitName, collection) =>{
     return true
 }
 
+export const deleteItemFromExhibit = (exhibitName, itemId) => {
+    const savedExhibits = JSON.parse(localStorage.getItem('exhibits')) || {};
+
+    if (savedExhibits[exhibitName]) {
+        const updatedExhibit = savedExhibits[exhibitName].filter(item => item.id !== itemId);
+        savedExhibits[exhibitName] = updatedExhibit;
+        localStorage.setItem('exhibits', JSON.stringify(savedExhibits));
+        return updatedExhibit; 
+    }
+    return [];
+};
+
 export const deletePersonalExhibit = (exhibitName) => {
     const savedExhibits = JSON.parse(localStorage.getItem('exhibits')) || {};
 
