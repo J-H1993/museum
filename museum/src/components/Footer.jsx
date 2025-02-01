@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
 
-const Footer = ({ selectedCollection }) => {
+const Footer = ({ selectedCollection, isManagePersonalExhibitsPage }) => {
   return (
     <footer className="footer full-width-footer">
       <div className="container-fluid text-center">
         <h3 className="footer-heading">About Collection:</h3>
 
-        {selectedCollection === 'Personal Exhibits' ? (
+        {isManagePersonalExhibitsPage ||
+        selectedCollection === "Personal Exhibits" ? (
           <>
             <p>Your own personal exhibition of artworks</p>
             <p className="footer-text">
               This collection has kindly been made available by the{" "}
-              <Link to="https://www.metmuseum.org/art/collection" className="footer-link">
+              <Link
+                to="https://www.metmuseum.org/art/collection"
+                className="footer-link"
+              >
                 Metropolitan Museum
               </Link>{" "}
               and the{" "}
@@ -24,7 +28,8 @@ const Footer = ({ selectedCollection }) => {
         ) : (
           <>
             <h3 className="footer-heading">
-              For more information about the {selectedCollection} please visit their{" "}
+              For more information about the {selectedCollection} please visit
+              their{" "}
               {selectedCollection === "Art Institute Of Chicago" ? (
                 <Link to={"https://www.artic.edu/"} className="footer-link">
                   website
@@ -40,13 +45,11 @@ const Footer = ({ selectedCollection }) => {
               .
             </h3>
             <p className="footer-text">
-          This collection has kindly been made available by the{" "}
-          {selectedCollection}.
-        </p>
+              This collection has kindly been made available by the{" "}
+              {selectedCollection}.
+            </p>
           </>
         )}
-
-        
       </div>
     </footer>
   );

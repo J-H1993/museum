@@ -19,14 +19,18 @@ const ManagePersonalExhibitsPage = () => {
   };
 
   return (
-    <div>
+    <div className="d-flex flex-column min-vh-100">
       <Header />
-      <h1>Select Your Exhibition</h1>
-      <CreatePersonalExhibit onPersonalExhibitCreated={personalExhibitClear} />
-      <ListOfPersonalExhibits onExhibitSelected={handleExhibitSelection} />
-      <Footer />
+      <div className="container mt-5 flex-grow-1">
+        <h1>Select Your Exhibition</h1>
+        <CreatePersonalExhibit onPersonalExhibitCreated={personalExhibitClear} />
+        <ListOfPersonalExhibits onExhibitSelected={handleExhibitSelection} />
+      </div>
+      <Footer isManagePersonalExhibitsPage={true} />
     </div>
   );
 };
 
 export default ManagePersonalExhibitsPage;
+
+
