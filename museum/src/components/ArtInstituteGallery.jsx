@@ -73,14 +73,16 @@ const ArtInstituteGallery = ({page, selectedExhibition, setTotalGallerySize}) =>
             {museumObjects.length === 0 && !isLoading ? (
                 <EmptyExhibitCard />
             ) : (
-                paginatedArtwork.map((artwork, index)=>{
-                    const imageUrl = `${iiif}/${artwork.image_id}/full/843,/0/default.jpg`
-                    return(
-                        <div key={artwork.id || index} className='col-md-4 mb-4'>
-                            <ArtifactCard key={artwork.id} artwork={artwork} imageUrl={imageUrl} artworkId={artwork.id} iiif={iiif}/>
-                        </div>
-                    )
-                })
+                <div className="row">
+                {paginatedArtwork.map((artwork, index) => {
+                  const imageUrl = `${iiif}/${artwork.image_id}/full/843,/0/default.jpg`;
+                  return (
+                    <div key={artwork.id || index} className="col-md-4 mb-4">
+                      <ArtifactCard artwork={artwork} imageUrl={imageUrl} artworkId={artwork.id} iiif={iiif} />
+                    </div>
+                  );
+                })}
+              </div>
             )}
         
         </>

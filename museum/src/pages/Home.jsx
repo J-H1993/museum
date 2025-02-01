@@ -49,7 +49,7 @@ const Home = () => {
     setSelectedPersonalExhibit(null);
     setPersonalExhibitLoaded(false);
   };
-
+  console.log(collection)
   return (
     <>
       <Header />
