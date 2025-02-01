@@ -3,7 +3,12 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  
 }
+
 
 .logo {
   height: 6em;
@@ -40,3 +45,69 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.navbar-custom {
+  background-color: #0a1c2c; 
+  border-bottom: 2px solid #d4af37; 
+}
+
+.navbar-custom .navbar-brand, 
+.navbar-custom .nav-link {
+  color: #d4af37; 
+  font-weight: bold;
+  background-image: linear-gradient(45deg, #ffd700 25%, #d4af37 50%, #ffd700 75%);
+  background-clip: text;
+  -webkit-background-clip: text; 
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 215, 0, 0.7), 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.footer {
+  background-color: #0a1c2c; 
+  color: #d4af37;  
+  border-top: 2px solid #d4af37; 
+  padding: 40px 0; 
+ 
+  width: 100%;  
+  position: relative; 
+  bottom: 0;
+}
+
+.footer-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-image: linear-gradient(45deg, #ffd700 25%, #d4af37 50%, #ffd700 75%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 215, 0, 0.7), 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.footer-text {
+  font-size: 1rem;
+  margin: 20px 0;
+}
+
+.footer-link {
+  color: #d4af37; 
+  font-weight: bold;
+  text-decoration: none;
+  background-image: linear-gradient(45deg, #ffd700 25%, #d4af37 50%, #ffd700 75%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 215, 0, 0.7), 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.footer-link:hover {
+  text-decoration: underline; 
+}
+
+.full-width-footer {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
+

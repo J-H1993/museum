@@ -5,23 +5,22 @@ import { getObjectById } from "../utils/api";
 import { getArtworkById } from "../utils/ArtInstituteOfChicago.api";
 import { handleSaveToExhibit } from "../components/PersonalExhibitonStorage";
 import { createPersonalExhibit } from "../components/PersonalExhibitonStorage";
-import Header from '../components/Header'
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Artifact = () => {
   const [artifact, setArtifact] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [personalExhibitName, setPersonalExhibitName] = useState("")
-  const [personalExhibitList, setPersonalExhibitList] = useState([])
+  const [personalExhibitName, setPersonalExhibitName] = useState("");
+  const [personalExhibitList, setPersonalExhibitList] = useState([]);
   const { artifact_id } = useParams();
-  const {artworkId} = useParams()
+  const { artworkId } = useParams();
   const { state } = useLocation();
   const collection = state.selectedCollection;
-  const iiif = state.iiif
-  const image_id = state?.image_id
-  console.log('logging image id in artifact page',image_id)
-  console.log('logging iiif state in artifact', iiif)
-
-
+  const iiif = state.iiif;
+  const image_id = state?.image_id;
+  console.log("logging image id in artifact page", image_id);
+  console.log("logging iiif state in artifact", iiif);
 
   useEffect(() => {
     if (collection === "Metropolitan Museum") {
@@ -52,30 +51,43 @@ const Artifact = () => {
     }
   }, [artifact_id, artworkId, collection]);
 
-  useEffect (()=>{
-    const savedPersonalExhibits = JSON.parse(localStorage.getItem("exhibits")) || {}
-    setPersonalExhibitList(Object.keys(savedPersonalExhibits))
-  }, [personalExhibitName])
+  useEffect(() => {
+    const savedPersonalExhibits =
+      JSON.parse(localStorage.getItem("exhibits")) || {};
+    setPersonalExhibitList(Object.keys(savedPersonalExhibits));
+  }, [personalExhibitName]);
 
-  const handleSaveClick = () =>{
-    if(!personalExhibitName){
-      alert("Please select or create a collection.")
-      return
+  const handleSaveClick = () => {
+    if (!personalExhibitName) {
+      alert("Please select or create a collection.");
+      return;
     }
-    const saved = handleSaveToExhibit(artifact, personalExhibitName, collection)
-    if(saved){
-      alert(`Saved to exhibit: ${personalExhibitName}`)
-      setPersonalExhibitName("")
+    const saved = handleSaveToExhibit(
+      artifact,
+      personalExhibitName,
+      collection
+    );
+    if (saved) {
+      alert(`Saved to exhibit: ${personalExhibitName}`);
+      setPersonalExhibitName("");
     }
-  }
+  };
 
-  const handleCreateExhibit = () =>{
-    const newPersonalExhibitName = prompt("Enter a name for your new exhibition")
-    if(newPersonalExhibitName && createPersonalExhibit(newPersonalExhibitName)){
-      setPersonalExhibitList((prevList)=>[...prevList, newPersonalExhibitName])
-      setPersonalExhibitName(newPersonalExhibitName)
+  const handleCreateExhibit = () => {
+    const newPersonalExhibitName = prompt(
+      "Enter a name for your new exhibition"
+    );
+    if (
+      newPersonalExhibitName &&
+      createPersonalExhibit(newPersonalExhibitName)
+    ) {
+      setPersonalExhibitList((prevList) => [
+        ...prevList,
+        newPersonalExhibitName,
+      ]);
+      setPersonalExhibitName(newPersonalExhibitName);
     }
-  }
+  };
 
   if (isLoading) {
     return <p>Loading artifact...</p>;
@@ -85,11 +97,11 @@ const Artifact = () => {
     return <p>No artifact found.</p>;
   }
 
-  const fullImageUrl = image_id ? `${iiif}/${image_id}/full/843,/0/default.jpg`:`${iiif}/${artifact.image_id}/full/843,/0/default.jpg`
+  const fullImageUrl = image_id
+    ? `${iiif}/${image_id}/full/843,/0/default.jpg`
+    : `${iiif}/${artifact.image_id}/full/843,/0/default.jpg`;
 
-  console.log('Logging full imageurl constructed in artifact',fullImageUrl)
-
-  
+  console.log("Logging full imageurl constructed in artifact", fullImageUrl);
 
   return (
     <div>
@@ -133,38 +145,45 @@ const Artifact = () => {
         </div>
       ) : (
         <div>
-            <h1>{artifact.title || 'Untitled'}</h1>
-            <img src={fullImageUrl}
-             alt={artifact.title || 'untitled'}
-             />
-            {artifact.culture_title ? <p>Culture: {artifact.culture_title}</p> : null}
-            <p>Artist: {artifact.artist_title || 'Unknown'}</p>
-            {artifact.artist_display ? (<p>Artist details: {artifact.artist_display}</p>) : null}
-            <p>Medium: {artifact.medium_display}</p>
-            {artifact.date_start ? (<p>Period date: {artifact.date_start} - {artifact.date_end}</p>) : null}
-            {artifact.description || "No description currently available."}
-            <p>Aquired by: {artifact.credit_line}</p>
-            <p>History of ownership: {artifact.provenance_text}</p>
-            
-
+          <h1>{artifact.title || "Untitled"}</h1>
+          <img src={fullImageUrl} alt={artifact.title || "untitled"} />
+          {artifact.culture_title ? (
+            <p>Culture: {artifact.culture_title}</p>
+          ) : null}
+          <p>Artist: {artifact.artist_title || "Unknown"}</p>
+          {artifact.artist_display ? (
+            <p>Artist details: {artifact.artist_display}</p>
+          ) : null}
+          <p>Medium: {artifact.medium_display}</p>
+          {artifact.date_start ? (
+            <p>
+              Period date: {artifact.date_start} - {artifact.date_end}
+            </p>
+          ) : null}
+          {artifact.description || "No description currently available."}
+          <p>Aquired by: {artifact.credit_line}</p>
+          <p>History of ownership: {artifact.provenance_text}</p>
         </div>
       )}
-       <div>
-            <h3>Save to Personal Exhibition</h3>
-            <select
-            value={personalExhibitName}
-            onChange={(event) => setPersonalExhibitName(event.target.value)}
-            >
-              <option value="">Select a Personal Exhibit</option>
-              {personalExhibitList.map((name)=>(
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
-            <button onClick={handleSaveClick}>Save to Collection</button>
-            <button onClick={handleCreateExhibit}>Create a New Personal Exhibit</button>
-          </div>
+      <div>
+        <h3>Save to Personal Exhibition</h3>
+        <select
+          value={personalExhibitName}
+          onChange={(event) => setPersonalExhibitName(event.target.value)}
+        >
+          <option value="">Select a Personal Exhibit</option>
+          {personalExhibitList.map((name) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </select>
+        <button onClick={handleSaveClick}>Save to Collection</button>
+        <button onClick={handleCreateExhibit}>
+          Create a New Personal Exhibit
+        </button>
+      </div>
+      <Footer selectedCollection={state.selectedCollection} />
     </div>
   );
 };
