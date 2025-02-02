@@ -81,10 +81,12 @@ const ArtInstituteGallery = ({
 
   return (
     <>
+    {isLoading && <p>Loading, please wait......</p>}
       {museumObjects.length === 0 && !isLoading ? (
         <EmptyExhibitCard />
       ) : (
         <div className="row">
+          {isLoading && <p>Loading, please wait......</p>}
           {paginatedArtwork.map((artwork, index) => {
             const imageUrl = `${iiif}/${artwork.image_id}/full/843,/0/default.jpg`;
             return (
