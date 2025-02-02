@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../App.css";
+import placeholder from "../assets/placeholder.jpg"
 
 const ArtifactCard = ({
   artifact,
@@ -16,7 +17,7 @@ const ArtifactCard = ({
       <div className="card h-100">
         <Link to={`/artifact/${objectID}`} state={{ selectedCollection }}>
           <img
-            src={primaryImageSmall || primaryImage || "placeholder.jpg"}
+            src={primaryImageSmall || primaryImage || placeholder}
             className="card-img-top"
             alt={title || "Untitled"}
           />
@@ -27,13 +28,14 @@ const ArtifactCard = ({
       </div>
     );
   } else {
+    const chicagoImageUrl = imageUrl || placeholder
     return (
       <div className="card h-100">
         <Link
           to={`/artworks/${artworkId}`}
-          state={{ selectedCollection, iiif }}
+          state={{ selectedCollection:selectedCollection || "Art Institute Of Chicago", iiif }}
         >
-          <img src={imageUrl} alt={artwork.title} className="card-img-top" />
+          <img src={chicagoImageUrl} alt={artwork.title} className="card-img-top" onError={(e)=> e.target.src = placeholder} />
           <h3>{artwork.title || "untitled"}</h3>
         </Link>
       </div>

@@ -5,6 +5,7 @@ import { getArtworkById } from "../utils/ArtInstituteOfChicago.api";
 import { handleSaveToExhibit, createPersonalExhibit } from "../components/PersonalExhibitonStorage";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import placeHolder from '../assets/placeholder.jpg'
 
 const Artifact = () => {
   const [artifact, setArtifact] = useState({});
@@ -18,8 +19,7 @@ const Artifact = () => {
   const iiif = state.iiif;
   const image_id = state?.image_id;
   
-  console.log('logging image id in artifact page', image_id);
-  console.log('logging iiif state in artifact', iiif);
+ console.log('logging collection state in artifact page', collection)
 
   useEffect(() => {
     if (collection === "Metropolitan Museum") {
@@ -102,7 +102,7 @@ const Artifact = () => {
               src={
                 artifact.primaryImage ||
                 artifact.primaryImageSmall ||
-                "placeholder.jpg"
+                placeHolder
               }
               alt={artifact.title || "Untitled"}
               className="img-fluid artifact-img mb-4" 
@@ -149,9 +149,10 @@ const Artifact = () => {
           <div className="text-center">
             <h1 className="mb-4">{artifact.title || "Untitled"}</h1>
             <img
-              src={fullImageUrl}
+              src={fullImageUrl || placeHolder}
               alt={artifact.title || "Untitled"}
               className="img-fluid artifact-img mb-4"
+              onError={(e) => e.target.src = placeHolder}
             />
             
             <div className="mt-4 mb-4">
