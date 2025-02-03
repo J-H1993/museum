@@ -15,6 +15,7 @@ export const createPersonalExhibit = (exhibitName) => {
 
   savedExhibits[exhibitName] = [];
   localStorage.setItem("exhibits", JSON.stringify(savedExhibits));
+  window.dispatchEvent(new Event("exhibitUpdated"));
   alert(`The ${exhibitName} exhibit has been sucessfully created!`);
   return true;
 };

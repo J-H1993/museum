@@ -15,8 +15,13 @@ const ListOfPersonalExhibits = ({ onExhibitSelected }) => {
 
     fetchExhibits();
 
+    window.addEventListener("exhibitUpdated", fetchExhibits);
     window.addEventListener("storage", fetchExhibits);
-    return () => window.removeEventListener("storage", fetchExhibits);
+
+    return () => {
+      window.removeEventListener("exhibitUpdated", fetchExhibits);
+      window.removeEventListener("storage", fetchExhibits);
+    };
   }, []);
 
   const handleDeleteExhibit = (exhibitName) => {
